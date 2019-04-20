@@ -4,14 +4,24 @@ import Order from "./Order";
 import Inventory from "./Inventory";
 
 class App extends React.Component {
+  state = {
+    fishes: {},
+    order: {}
+  };
+  addFish = fish => {
+    console.log("addFish");
+    const fishes = {...this.state.fishes};
+    fishes[`fish${Date.now()}`] = fish;
+    this.setState({fishes});
+  };
   render() {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header tagline="fresh seafood market" age={500} cool={true}/>
+          <Header tagline="fresh seafood market" age={500} cool={true} />
         </div>
         <Order />
-        <Inventory />
+        <Inventory addFish={this.addFish}/>
       </div>
     );
   }
